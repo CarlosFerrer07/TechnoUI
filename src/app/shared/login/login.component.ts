@@ -9,6 +9,7 @@ import {
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [
@@ -17,6 +18,8 @@ import { ButtonModule } from 'primeng/button';
     PasswordModule,
     FormsModule,
     ButtonModule,
+    RouterLink,
+    RouterLinkActive,
   ],
   standalone: true,
   templateUrl: './login.component.html',
