@@ -1,0 +1,61 @@
+<div class="centered-container">
+  <div class="login-box">
+    <div>
+      <h1>REGISTER</h1>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="flex flex-col gap-2">
+        <label for="nombre">Introduzca su nombre</label><br />
+        <input
+          pInputText
+          id="nombre"
+          aria-describedby="nombre-help"
+          formControlName="nombre"
+          style="width: 75%"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="apellido1">Introduzca su Apellido 1</label><br />
+        <input
+          pInputText
+          id="apellido1"
+          aria-describedby="apellido1-help"
+          formControlName="apellido1"
+          style="width: 75%"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="apellido2">Introduzca su Apellido 2</label><br />
+        <input
+          pInputText
+          id="apellido2"
+          aria-describedby="apellido2-help"
+          formControlName="apellido2"
+          style="width: 75%"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="email">Introduzca su Email</label><br />
+        <input
+          pInputText
+          id="email"
+          aria-describedby="email-help"
+          formControlName="email"
+          style="width: 75%"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="password">Introduzca su Contraseña</label><br />
+        <p-password [toggleMask]="true" formControlName="password" />
+      </div>
+      <div style="margin-top: 10px">
+        <p-button
+          label="Submit"
+          [rounded]="true"
+          severity="contrast"
+          type="submit"
+        />
+      </div>
+    </form>
+  </div>
+</div>
