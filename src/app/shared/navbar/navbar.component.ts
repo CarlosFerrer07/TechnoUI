@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 
@@ -11,17 +12,22 @@ import { Menubar } from 'primeng/menubar';
 })
 export class NavbarComponent {
   items: MenuItem[] | undefined;
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.items = [
       {
         label: 'Home',
-        icon: 'pi pi-home',
+        command: () => this.onMenuClick('/dashboard/home'),
       },
       {
         label: 'Users',
-        icon: 'pi pi-star',
+        command: () => this.onMenuClick('/dashboard/users'),
       },
     ];
+  }
+
+  onMenuClick(menu: string) {
+    this.router.navigate([menu]);
   }
 }
