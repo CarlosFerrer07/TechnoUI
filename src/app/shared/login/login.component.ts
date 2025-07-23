@@ -1,3 +1,4 @@
+import { AuthService } from './../../Core/services/auth.service';
 import { Component } from '@angular/core';
 import {
   FormControl,
@@ -9,7 +10,7 @@ import {
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [
@@ -19,7 +20,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     FormsModule,
     ButtonModule,
     RouterLink,
-    RouterLinkActive,
   ],
   standalone: true,
   templateUrl: './login.component.html',
@@ -31,5 +31,17 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   });
 
-  onSubmit() {}
+  constructor(private AuthService: AuthService) {}
+
+  onSubmit() {
+    const req = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
+
+    this.AuthService.getToken(req);
+
+    this.loginForm.reset();
+    console.log(req);
+  }
 }
