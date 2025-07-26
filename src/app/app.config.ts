@@ -5,7 +5,9 @@ import { providePrimeNG } from 'primeng/config';
 import Material from '@primeuix/themes/Material';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { httpInterceptor } from './Core/interceptors/http.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +23,6 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+    provideHttpClient(withInterceptors([httpInterceptor])),
   ],
 };
