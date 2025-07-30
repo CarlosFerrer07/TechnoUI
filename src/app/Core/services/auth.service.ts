@@ -1,6 +1,7 @@
 import { environment } from './../../../environments/environment.development';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -9,11 +10,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getToken(authRequest: any) {
-    this.http
+  doLogin(authRequest: any) {
+    return this.http
       .post<any>(this.API_URL + '/Api/Auth/Login', authRequest)
-      .subscribe((res: any) => {
-        console.log('La respuesta', res);
-      });
+      .pipe(
+        tap((res: any) => {
+          const token = res.token;
+          localStorage.setItem('token', JSON.stringify(token));
+        })
+      );
   }
 }

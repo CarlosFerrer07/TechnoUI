@@ -3,10 +3,15 @@ import { Routes } from '@angular/router';
 import { AuthComponent } from './Core/auth/auth.component';
 import { RegisterComponent } from './shared/register/register.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { authGuard } from './Core/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
+    component: AuthComponent,
+  },
+  {
+    path: 'login',
     component: AuthComponent,
   },
   {
@@ -16,6 +21,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',

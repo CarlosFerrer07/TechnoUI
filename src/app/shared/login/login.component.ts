@@ -10,7 +10,7 @@ import {
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [
@@ -31,7 +31,7 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private AuthService: AuthService) {}
+  constructor(private AuthService: AuthService, private router: Router) {}
 
   onSubmit() {
     const req = {
@@ -39,9 +39,13 @@ export class LoginComponent {
       password: this.loginForm.value.password,
     };
 
-    this.AuthService.getToken(req);
-
-    this.loginForm.reset();
-    console.log(req);
+    this.AuthService.doLogin(req).subscribe({
+      next: (res: any) => {
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 }
