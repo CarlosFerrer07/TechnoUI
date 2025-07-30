@@ -1,3 +1,4 @@
+import { toastService } from './../../Core/services/toast.service';
 import { AuthService } from './../../Core/services/auth.service';
 import { Component } from '@angular/core';
 import {
@@ -11,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { Router, RouterLink } from '@angular/router';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   imports: [
@@ -31,7 +33,11 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private AuthService: AuthService, private router: Router) {}
+  constructor(
+    private AuthService: AuthService,
+    private router: Router,
+    private toastService: toastService
+  ) {}
 
   onSubmit() {
     const req = {
@@ -41,10 +47,12 @@ export class LoginComponent {
 
     this.AuthService.doLogin(req).subscribe({
       next: (res: any) => {
+        this.toastService.show('success', 'Logeado con éxito');
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
-        console.error(err);
+        this.toastService.show('error', err.error.mensaje);
+        this.loginForm.reset();
       },
     });
   }
