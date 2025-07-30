@@ -20,4 +20,8 @@ export class AuthService {
         })
       );
   }
+
+  doLogout() {
+    localStorage.removeItem('token');
+  }
 }

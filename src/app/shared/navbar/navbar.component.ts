@@ -1,3 +1,4 @@
+import { AuthService } from './../../Core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
@@ -12,7 +13,7 @@ import { Menubar } from 'primeng/menubar';
 })
 export class NavbarComponent {
   items: MenuItem[] | undefined;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.items = [
@@ -24,10 +25,19 @@ export class NavbarComponent {
         label: 'Users',
         command: () => this.onMenuClick('/dashboard/users'),
       },
+      {
+        label: 'Logout',
+        command: () => this.logout(),
+      },
     ];
   }
 
   onMenuClick(menu: string) {
     this.router.navigate([menu]);
+  }
+
+  logout() {
+    this.authService.doLogout();
+    this.router.navigate(['/login']);
   }
 }
