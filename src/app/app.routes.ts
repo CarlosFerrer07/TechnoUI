@@ -2,7 +2,7 @@ import { UsersComponent } from './features/users/users.component';
 import { Routes } from '@angular/router';
 import { AuthComponent } from './Core/auth/auth.component';
 import { RegisterComponent } from './shared/register/register.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { LayoutComponent } from './features/layout/layout.component';
 import { authGuard } from './Core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -19,8 +19,8 @@ export const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'layout',
+    component: LayoutComponent,
     canActivate: [authGuard],
     children: [
       {
