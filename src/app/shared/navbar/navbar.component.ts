@@ -19,11 +19,11 @@ export class NavbarComponent {
     this.items = [
       {
         label: 'Home',
-        command: () => this.onMenuClick('/dashboard/home'),
+        command: () => this.onMenuClick('/layout/home'),
       },
       {
         label: 'Users',
-        command: () => this.onMenuClick('/dashboard/users'),
+        command: () => this.onMenuClick('/layout/users'),
       },
       {
         label: 'Logout',

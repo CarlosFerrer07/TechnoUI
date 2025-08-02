@@ -48,7 +48,7 @@ export class LoginComponent {
     this.AuthService.doLogin(req).subscribe({
       next: (res: any) => {
         this.toastService.show('success', 'Logeado con éxito');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/layout']);
       },
       error: (err) => {
         this.toastService.show('error', err.error.mensaje);
